@@ -51,4 +51,4 @@ But then, every value's status has to intefere with every other value's status, 
 0.5 -0.125 
 -0.09375 -0.1875
 ```
-... automatically.
+... clearly a lot more complicated than our original number, but we can see patterns. The lowest number is `-0.1875`, which makes sense, as to the eyes of the algorithm, a diagonal is further away than a horizontal or vertical joint. Then, the next lowest is `-0.125`, which is because in a picture, a horizontal
