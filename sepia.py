@@ -1,13 +1,16 @@
-#SEPIA - Smart Evolving Pixel Interpreting Algorithm
+#SEPIA - Suggestive Evolving Pixel Interpreting Algorithm
 
 names = []
 costs = []
+
+width = int(input("Amount of pixels in each row"))
+pixels = int(input("Amount of rows in picture")) * width
 
 for i in range(int(input("Amount of possible values"))):
   names.append(input("Input number " + str(i+1) + " "))
   exec(names[i] + " = []")
 
-amount = int(input("Length of inputs to be given"))
+amount = pixels
 
 for b in range(len(names)):
   for i in range(amount):
@@ -27,10 +30,26 @@ for i in range(int(input("Amount of inputs to be given"))):
         exec(value + "[b-1] = (" + value + "[b-1] + 0.5) / 2")
       if b > 1:
         exec(value + "[b-2] = (" + value + "[b-2] + 0.25) / 2")
-      if b != limit:
-        exec(value + "[b+1] = (" + value + "[b+1] + 0.5) / 2")
       if b < limit - 1:
+        exec(value + "[b+1] = (" + value + "[b+1] + 0.5) / 2")
+      if b < limit - 2:
         exec(value + "[b+2] = (" + value + "[b+2] + 0.25) / 2")
+      if b > width:
+        exec(value + "[b-width] = (" + value + "[b-width] + 0.5) / 2")
+      if b > width * 2:
+        exec(value + "[b-(width*2)] = (" + value + "[b-(width*2)] + 0.25) / 2")
+      if b > width - 1:
+        exec(value + "[b-(width-1)] = (" + value + "[b-(width-1)] + 0.25) / 2")
+      if b > width + 1:
+        exec(value + "[b-(width+1)] = (" + value + "[b-(width+1)] + 0.25) / 2")
+      if b < pixels - width:
+        exec(value + "[b+width] = (" + value + "[b+width] + 0.5) / 2")
+      if b < pixels - (width * 2):
+        exec(value + "[b+(width*2)] = (" + value + "[b+(width*2)] + 0.25) / 2")
+      if b < pixels - (width - 1):
+        exec(value + "[b+(width-1)] = (" + value + "[b+(width-1)] + 0.25) / 2")
+      if b < pixels - (width + 1):
+        exec(value + "[b+(width+1)] = (" + value + "[b+(width+1)] + 0.25) / 2")
     
   for b in range(len(names)):
     print(names[b], "=", eval(names[b]))
