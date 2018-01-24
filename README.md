@@ -1,4 +1,4 @@
-'# SEPIA
+# SEPIA
 _SEPIA - Smart Evolving Pixel Interpreting Algorithm_
 
 ### A machine learning algorithm to learn and detect image contents
