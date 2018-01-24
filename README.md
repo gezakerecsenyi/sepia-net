@@ -28,3 +28,27 @@ would become
 ... without any other data.
 
 Under close observation, this clearly shows that the most dominant number in the input has the largest effect on those around it: a `1` can leave a trace on the surrounding numbers, as when the algorithm is in use after training, the entered pixel data might include some information that it has never seen before (maybe the whole shape is move a little to the right, or one angle of the triange is steeper than ever previously encountered. In this case, the aforementioned can 'save the day', as in training the adjacent and almost adjacent `1`s can still leave a positive effect on those that were untouched. However, as the pixel costs are a result of an average of all of the training info (plus what is passed on from adjacent pixels), any anomolies can be cancelled out with relatively few generations.
+
+In a smaller sample, we would find that
+```
+1 0
+0 0
+```
+would become
+```
+1 0.5
+0.5 0.25
+```
+
+However, as there are minus scores for having a '0' status, we would be left with
+```
+1 0.25
+0.25 0.0
+```
+
+But then, every value's status has to intefere with every other value's status, and we have generated a new 0.0 now, which has to be given minus points, and this continues until eventually there are no more required steps, and the simple, four digit `1000` sequence we entered at the start finally gets interpreted and 'saved' as 
+```
+0.5 -0.125 
+-0.09375 -0.1875
+```
+... automatically.
