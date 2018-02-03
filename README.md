@@ -1,7 +1,9 @@
- # SEPIA
+# SEPIA
 _SEPIA - Suggestive Evolving Pixel Interpreting Algorithm_
 
 ### A machine learning algorithm to learn and detect image contents
+
+## Suggestion
 
 SEPIA uses a cost averaging algorithm to use image pixel data in the most efficient way possible. Using center-biased radial cost increase gradients, the algorithm is made to use **approximate** pixel locations, meaning it is optimised specifically for two dimensional, low detail, two-toned images (e.g. a black square against a white background, or letters of the alphabet). It is also fully scaleable in all ways, meaning that it can work with almost any shapes with as many combinations and variations as required, without a need to edit any code.
 
@@ -46,9 +48,11 @@ However, as there are minus scores for having a '0' status, we would be left wit
 -0.25 -0.5
 ```
 
-But then, every value's status has to intefere with every other value's status, and we have generated a new 0.0 now, which has to be given minus points, and this continues until eventually there are no more required steps, and the simple, four digit `1000` sequence we entered at the start finally gets interpreted and 'saved' as 
+But then, every value's status has to intefere with every other value's status, and we have generated a new `0.0` now, which has to be given minus points, and this continues until eventually there are no more required steps, and the simple, four digit `1000` sequence we entered at the start finally gets interpreted and 'saved' as 
 ```
 0.5 -0.125 
 -0.09375 -0.1875
 ```
-... clearly a lot more complicated than our original number, but we can see patterns. The lowest number is `-0.1875`, which makes sense, as to the eyes of the algorithm, a diagonal is further away than a horizontal or vertical joint. Then, the next lowest is `-0.125`, which is because in a picture, a horizontal pixel is generally more likely to be defined during training with many different offsets than a vertical one, so it is lower to avoid over-compensation. Finally, the biggest number (other than `0.5`, which is the biggest, for obvious reasons) is `-0.09375`, as it is a vertically offset pixel, so it gets more compensation than a diagonal or horizontal offset, and wasn't extremely negative in the first stage either, so it has a much higher calculated score than the others - and remember: these numbers were all zeros to begin with, and without any training data it turned them into these confusing yet very logical decimals - all without any extra training data.
+... clearly a lot more complicated than our original number, but we can see patterns. The lowest number is `-0.1875`, which makes sense, as to the eyes of the algorithm, a diagonal is further away than a horizontal or vertical joint. Then, the next lowest is `-0.125`, which is because in a picture, a horizontal pixel is generally more likely to be defined during training with many different offsets than a vertical one, so it is lower to avoid over-compensation. Finally, the biggest number (other than `0.5`, which is the biggest, for obvious reasons) is `-0.09375`, as it is a vertically offset pixel, so it gets more compensation than a diagonal or horizontal offset, and wasn't extremely negative in the first stage either, so it has a much higher calculated score than the others - and remember: these numbers were all zeros to begin with, and without any training data it turned them into these confusing yet very logical decimals in just the first generation.
+
+In the following generations of data, the numbers are converted to this sugggestive format, and averaged out with the average from previous generations. All in all, this optimises SEPIA for shape recognition, so __do _not_ attempt to use it for text, audio, or coloured pictures.
